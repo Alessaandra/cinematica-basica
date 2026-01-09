@@ -32,8 +32,8 @@ header{
 }
 
 .container{
-    max-width:800px;
-    margin:auto;
+    width:90%;
+    max-width:700px;
     padding:20px;
 }
 
