@@ -32,40 +32,6 @@ header{
 }
 
 .container{
-    max-width:800px;<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Cinemática Explorer</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-:root{
-    --bg:#0a0a0c;
-    --card:#161b22;
-    --primary:#9c27b0;
-    --accent:#00d4ff;
-    --text:#f0f6fc;
-}
-
-body{
-    margin:0;
-    font-family: system-ui, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-}
-
-header{
-    padding:30px;
-    text-align:center;
-    background:linear-gradient(180deg,#210535,var(--bg));
-    border-bottom:2px solid var(--primary);
-}
-
-.container{
     max-width:800px;
     margin:auto;
     padding:20px;
@@ -361,6 +327,7 @@ Agora o movimento tem aceleração constante. Observe como a velocidade varia co
 <canvas id="graficoVT"></canvas>
 </div>
 
+<button onclick="resetar()">🔄 Resetar Simulação</button>
 
 </div>
 
@@ -376,66 +343,73 @@ document.getElementById("nivel").textContent=Math.floor(pontos/30)+1;
 
 
 function fase1(){
-let r=document.getElementById("r1");
-if(q1.value==="certo"){
-pontos+=10;
-r.innerHTML="✅ Correto! Movimento depende do referencial.";
-r.className="result correct";
-}else{
-r.innerHTML="❌ Atenção! Em relação ao banco, o passageiro está em repouso.";
-r.className="result wrong";
+    let q1 = document.getElementById("q1").value;
+    let r = document.getElementById("r1");
+
+    if(q1 === "certo"){
+        pontos += 10;
+        r.innerHTML = "✅ Correto! Movimento depende do referencial.";
+    } else {
+        r.innerHTML = "❌ Atenção! Em relação ao banco, o passageiro está em repouso.";
+    }
+    r.style.display = "block";
+    atualizar();
 }
-r.style.display="block";
-atualizar();
-}
+
 
 function fase2(){
-let d=parseFloat(desl.value);
-let dist=parseFloat(dist.value);
-let r=document.getElementById("r2");
+    let deslocamento = parseFloat(document.getElementById("desl").value);
+    let distancia = parseFloat(document.getElementById("dist").value);
+    let r = document.getElementById("r2");
 
-if(d===0 && dist===10){
-pontos+=10;
-r.innerHTML="✅ Excelente! Deslocamento = 0 km e distância = 10 km.";
-r.className="result correct";
-}else{
-r.innerHTML="❌ Revise: deslocamento depende da posição final e inicial.";
-r.className="result wrong";
-}
-r.style.display="block";
-atualizar();
+    if(deslocamento === 0 && distancia === 10){
+        pontos += 10;
+        r.innerHTML = "✅ Excelente! Deslocamento = 0 km e distância = 10 km.";
+    } else {
+        r.innerHTML = "❌ Revise: deslocamento depende da posição inicial e final.";
+    }
+    r.style.display = "block";
+    atualizar();
 }
 
 function fase3(){
-let vm=d3.value/t3.value;
-let r=document.getElementById("r3");
-pontos+=10;
-r.innerHTML=`🚗 Velocidade média = <strong>${vm.toFixed(1)} km/h</strong>`;
-r.style.display="block";
-atualizar();
+    let d = parseFloat(document.getElementById("d3").value);
+    let t = parseFloat(document.getElementById("t3").value);
+    let vm = d / t;
+
+    let r = document.getElementById("r3");
+    pontos += 10;
+    r.innerHTML = `🚗 Velocidade média = <strong>${vm.toFixed(1)} km/h</strong>`;
+    r.style.display = "block";
+    atualizar();
 }
 
 function fase4(){
-let a=(vf.value-vi.value)/t4.value;
-let r=document.getElementById("r4");
-pontos+=10;
-r.innerHTML=`⚡ Aceleração média = <strong>${a.toFixed(2)} m/s²</strong>`;
-r.style.display="block";
-atualizar();
+    let vi = parseFloat(document.getElementById("vi").value);
+    let vf = parseFloat(document.getElementById("vf").value);
+    let t = parseFloat(document.getElementById("t4").value);
+
+    let a = (vf - vi) / t;
+
+    let r = document.getElementById("r4");
+    pontos += 10;
+    r.innerHTML = `⚡ Aceleração média = <strong>${a.toFixed(2)} m/s²</strong>`;
+    r.style.display = "block";
+    atualizar();
 }
 
 function fase5(){
-let r=document.getElementById("r5");
-if(q5.value==="certo"){
-pontos+=10;
-r.innerHTML="🎉 Perfeito! Velocidade positiva e crescente → progressivo e acelerado.";
-r.className="result correct";
-}else{
-r.innerHTML="❌ Pense no sinal da velocidade e da aceleração.";
-r.className="result wrong";
-}
-r.style.display="block";
-atualizar();
+    let q5 = document.getElementById("q5").value;
+    let r = document.getElementById("r5");
+
+    if(q5 === "certo"){
+        pontos += 10;
+        r.innerHTML = "🎉 Perfeito! Velocidade positiva e crescente → progressivo e acelerado.";
+    } else {
+        r.innerHTML = "❌ Pense no sinal da velocidade e da aceleração.";
+    }
+    r.style.display = "block";
+    atualizar();
 }
 
 function verificaConceito2(){
@@ -622,4 +596,3 @@ function faseMRUV(){
 
 </body>
 </html>
-
