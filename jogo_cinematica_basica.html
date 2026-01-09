@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinemática Explorer</title>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+    --bg:#0a0a0c;
+    --card:#161b22;
+    --primary:#9c27b0;
+    --accent:#00d4ff;
+    --text:#f0f6fc;
+}
+
+body{
+    margin:0;
+    font-family: system-ui, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+header{
+    padding:30px;
+    text-align:center;
+    background:linear-gradient(180deg,#210535,var(--bg));
+    border-bottom:2px solid var(--primary);
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    padding:20px;
+}
+
+.badge{
+    background:#000;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid var(--primary);
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.card{
+    background:var(--card);
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:30px;
+    border:1px solid #30363d;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);
+}
+
+h2{ color:var(--accent); }
+
+label{
+    display:block;
+    margin-top:10px;
+    font-size:.9rem;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #30363d;
+    background:#0d1117;
+    color:white;
+}
+
+button{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:var(--primary);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{ background:#7b1fa2; }
+
+.result{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    background:#1c2128;
+    border-left:4px solid var(--accent);
+    border-radius:8px;
+}
+
+canvas{
+    margin-top:20px;
+    background:#ffffff;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🚀 Cinemática Explorer</h1>
+<p>Aprenda Cinemática com gráficos e desafios interativos</p>
+</header>
+
+<div class="container">
+
+<div class="badge">
+⭐ Pontos: <span id="pontos">0</span> | 🎖️ Nível: <span id="nivel">1</span>
+</div>
+
+<!-- FASE 1 -->
+<div class="card">
+<h2>🎯 Fase 1 – Movimento e Referencial</h2>
+<p>Um corpo está em movimento quando sua posição muda em relação a um observador.</p>
+
+<p><strong>Pergunta:</strong> Um passageiro sentado em um ônibus em movimento está:</p>
+
+<select id="q1">
+<option value="">Selecione</option>
+<option value="errado">Em movimento em relação ao banco</option>
+<option value="certo">Em repouso em relação ao banco</option>
+</select>
+
+<button onclick="fase1()">Responder</button>
+<div id="r1" class="result"></div>
+</div>
+
+<!-- FASE 2 -->
+<div class="card">
+<h2>📍 Fase 2 – Deslocamento e Distância</h2>
+
+<p>Um entregador sai do ponto 0 km, vai até 5 km e retorna ao ponto inicial.</p>
+
+<label>Deslocamento total (km)</label>
+<input type="number" id="desl">
+
+<label>Distância percorrida (km)</label>
+<input type="number" id="dist">
+
+<button onclick="fase2()">Verificar</button>
+<div id="r2" class="result"></div>
+</div>
+
+<!-- FASE 3 -->
+<div class="card">
+<h2>⏱️ Fase 3 – Velocidade Média</h2>
+
+<label>Distância total (km)</label>
+<input type="number" id="d3" value="200">
+
+<label>Tempo (h)</label>
+<input type="number" id="t3" value="4">
+
+<button onclick="fase3()">Calcular</button>
+<div id="r3" class="result"></div>
+</div>
+
+<!-- FASE 4 -->
+<div class="card">
+<h2>⚡ Fase 4 – Aceleração Média</h2>
+
+<label>Velocidade inicial (m/s)</label>
+<input type="number" id="vi">
+
+<label>Velocidade final (m/s)</label>
+<input type="number" id="vf">
+
+<label>Tempo (s)</label>
+<input type="number" id="t4">
+
+<button onclick="fase4()">Calcular</button>
+<div id="r4" class="result"></div>
+</div>
+
+<!-- FASE 5 -->
+<div class="card">
+<h2>🧠 Fase 5 – Tipo de Movimento</h2>
+
+<p>Velocidade aumentando de forma constante indica:</p>
+
+<select id="conceito2">
+<option value="">Escolha</option>
+<option value="a">MRU</option>
+<option value="b">MRUV</option>
+</select>
+
+<button onclick="verificaConceito2()">Responder</button>
+<div id="respConceito2" class="result"></div>
+</div>
+
+<!-- FASE 6 -->
+<div class="card">
+<h2>🧭 Fase 6 – Classificação</h2>
+
+<select id="q5">
+<option value="">Selecione</option>
+<option value="errado">Retrógrado e retardado</option>
+<option value="certo">Progressivo e acelerado</option>
+<option value="errado">Progressivo e retardado</option>
+</select>
+
+<button onclick="fase5()">Responder</button>
+<div id="r5" class="result"></div>
+</div>
+
+<!-- FASE 7 -->
+<div class="card">
+<h2>🧪 Fase 7 – Missão Investigativa</h2>
+
+<p>Um gráfico posição &times; tempo parabólico indica:</p>
+
+<select id="missao1">
+<option value="">Escolha</option>
+<option value="a">Aceleração nula</option>
+<option value="b">Aceleração positiva</option>
+<option value="c">Aceleração negativa</option>
+</select>
+
+<button onclick="verificaMissao1()">Responder</button>
+<div id="respMissao1" class="result"></div>
+</div>
+
+<!-- FASE 8 -->
+<div class="card">
+<h2>🟣 Fase 8 – Função Horária da Posição (MRUV)</h2>
+
+<p><strong>s(t) = s&#8320; + v&#8320;t + &frac12;at²</strong></p>
+
+<label>s&#8320; (m)</label>
+<input type="number" id="s0_mruv" value="0">
+
+<label>v&#8320; (m/s)</label>
+<input type="number" id="v0_mruv" value="2">
+
+<label>a (m/s²)</label>
+<input type="number" id="a_mruv" value="1">
+
+<label>Tempo total (s)</label>
+<input type="number" id="t_mruv" value="10">
+
+<button onclick="faseMRUV()">Gerar Gráfico</button>
+<div id="r_mruv" class="result"></div>
+<canvas id="graficoMRUV"></canvas>
+</div>
+
+<!-- MRU -->
+<div class="card">
+<h2>📈 MRU – Posição &times; Tempo</h2>
+
+<label>s&#8320; (m)</label>
+<input type="number" id="s0" value="0">
+
+<label>v (m/s)</label>
+<input type="number" id="v" value="2">
+
+<label>Tempo (s)</label>
+<input type="number" id="t" value="10">
+
+<button onclick="faseVelocidade()">Executar</button>
+<div id="rv" class="result"></div>
+<canvas id="graficoST"></canvas>
+</div>
+
+<!-- MRUV -->
+<div class="card">
+<h2>⚡ MRUV – Velocidade &times; Tempo</h2>
+
+<label>v&#8320; (m/s)</label>
+<input type="number" id="v0" value="0">
+
+<label>a (m/s²)</label>
+<input type="number" id="a" value="1">
+
+<label>Tempo (s)</label>
+<input type="number" id="t2" value="10">
+
+<button onclick="faseAceleracao()">Executar</button>
+<div id="ra" class="result"></div>
+<canvas id="graficoVT"></canvas>
+</div>
+
+<button onclick="resetar()">🔄 Resetar Simulação</button>
+
+</div>
+
+<script>
+let pontos = 0;
+let graficoST, graficoVT, graficoMRUV;
+
+function atualizar(){
+    document.getElementById("pontos").textContent = pontos;
+    document.getElementById("nivel").textContent = Math.floor(pontos/30)+1;
+}
+
+function fase1(){
+    let r = document.getElementById("r1");
+    if(document.getElementById("q1").value==="certo"){
+        pontos+=10;
+        r.innerHTML="✅ Correto!";
+    }else{
+        r.innerHTML="❌ Em relação ao banco, está em repouso.";
+    }
+    r.style.display="block";
+    atualizar();
+}
+
+function fase2(){
+    let d = +desl.value;
+    let di = +dist.value;
+    let r = document.getElementById("r2");
+    if(d===0 && di===10){
+        pontos+=10;
+        r.innerHTML="✅ Perfeito!";
+    }else{
+        r.innerHTML="❌ Reveja deslocamento e distância.";
+    }
+    r.style.display="block";
+    atualizar();
+}
+
+function fase3(){
+    let vm = d3.value/t3.value;
+    let r = document.getElementById("r3");
+    pontos+=10;
+    r.innerHTML=`🚗 v<sub>m</sub> = ${vm.toFixed(1)} km/h`;
+    r.style.display="block";
+    atualizar();
+}
+
+function fase4(){
+    let a = (vf.value-vi.value)/t4.value;
+    let r = document.getElementById("r4");
+    pontos+=10;
+    r.innerHTML=`⚡ a = ${a.toFixed(2)} m/s²`;
+    r.style.display="block";
+    atualizar();
+}
+
+function verificaConceito2(){
+    let r = document.getElementById("respConceito2");
+    if(conceito2.value==="b"){
+        pontos+=10;
+        r.innerHTML="✅ Correto!";
+    }else{
+        r.innerHTML="❌ MRU tem velocidade constante.";
+    }
+    r.style.display="block";
+    atualizar();
+}
+
+function fase5(){
+    let r = document.getElementById("r5");
+    if(q5.value==="certo"){
+        pontos+=10;
+        r.innerHTML="🎉 Excelente!";
+    }else{
+        r.innerHTML="❌ Pense no sinal da velocidade.";
+    }
+    r.style.display="block";
+    atualizar();
+}
+
+function verificaMissao1(){
+    let r = document.getElementById("respMissao1");
+    if(missao1.value==="b"){
+        pontos+=15;
+        r.innerHTML="✅ Aceleração positiva!";
+    }else{
+        r.innerHTML="❌ Observe a concavidade.";
+    }
+    r.style.display="block";
+    atualizar();
+}
+
+function faseVelocidade(){
+    let tempo=[], pos=[];
+    for(let i=0;i<=t.value;i++){
+        tempo.push(i);
+        pos.push(+s0.value + +v.value*i);
+    }
+    if(graficoST) graficoST.destroy();
+    graficoST=new Chart(graficoST=document.getElementById("graficoST"),{
+        type:"line",
+        data:{labels:tempo,datasets:[{label:"Posição (m)",data:pos,borderWidth:2}]},
+        options:{scales:{x:{title:{display:true,text:"Tempo (s)"}},y:{title:{display:true,text:"Posição (m)"}}}}
+    });
+}
+
+function faseAceleracao(){
+    let tempo=[], vel=[];
+    for(let i=0;i<=t2.value;i++){
+        tempo.push(i);
+        vel.push(+v0.value + +a.value*i);
+    }
+    if(graficoVT) graficoVT.destroy();
+    graficoVT=new Chart(document.getElementById("graficoVT"),{
+        type:"line",
+        data:{labels:tempo,datasets:[{label:"Velocidade (m/s)",data:vel,borderWidth:2}]},
+        options:{scales:{x:{title:{display:true,text:"Tempo (s)"}},y:{title:{display:true,text:"Velocidade (m/s)"}}}}
+    });
+}
+
+function faseMRUV(){
+    let tempo=[], pos=[];
+    for(let i=0;i<=t_mruv.value;i++){
+        tempo.push(i);
+        pos.push(+s0_mruv.value + +v0_mruv.value*i + 0.5*a_mruv.value*i*i);
+    }
+    if(graficoMRUV) graficoMRUV.destroy();
+    graficoMRUV=new Chart(document.getElementById("graficoMRUV"),{
+        type:"line",
+        data:{labels:tempo,datasets:[{label:"Posição (m)",data:pos,borderWidth:2}]},
+        options:{scales:{x:{title:{display:true,text:"Tempo (s)"}},y:{title:{display:true,text:"Posição (m)"}}}}
+    });
+}
+
+function resetar(){
+    pontos=0;
+    atualizar();
+    document.querySelectorAll(".result").forEach(r=>r.style.display="none");
+    if(graficoST) graficoST.destroy();
+    if(graficoVT) graficoVT.destroy();
+    if(graficoMRUV) graficoMRUV.destroy();
+}
+</script>
+
+</body>
+</html>
