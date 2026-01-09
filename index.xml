@@ -32,6 +32,40 @@ header{
 }
 
 .container{
+    max-width:800px;<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cinemática Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+    --bg:#0a0a0c;
+    --card:#161b22;
+    --primary:#9c27b0;
+    --accent:#00d4ff;
+    --text:#f0f6fc;
+}
+
+body{
+    margin:0;
+    font-family: system-ui, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+header{
+    padding:30px;
+    text-align:center;
+    background:linear-gradient(180deg,#210535,var(--bg));
+    border-bottom:2px solid var(--primary);
+}
+
+.container{
     max-width:800px;
     margin:auto;
     padding:20px;
@@ -192,7 +226,27 @@ A aceleração indica a variação da velocidade ao longo do tempo.
 
 <!-- FASE 5 -->
 <div class="card">
-<h2>🧭 Fase 5 – Classificação do Movimento</h2>
+<h2>🧠 FASE 5 – Tipo de Movimento</h2>
+
+<p>
+Um corpo apresenta velocidade aumentando com o tempo de forma constante.
+Esse movimento é:
+</p>
+
+<select id="conceito2">
+  <option value="">Escolha</option>
+  <option value="a">MRU</option>
+  <option value="b">MRUV</option>
+</select>
+
+<button onclick="verificaConceito2()">Responder</button>
+
+<div id="respConceito2" class="result"></div>
+</div>
+
+<!-- FASE 6 -->
+<div class="card">
+<h2>🧭 Fase 6 – Classificação do Movimento</h2>
 <p>
 Se a velocidade é positiva e aumenta com o tempo, o movimento é:
 </p>
@@ -208,8 +262,31 @@ Se a velocidade é positiva e aumenta com o tempo, o movimento é:
 <div id="r5" class="result"></div>
 </div>
 
+
 <div class="card">
-<h2>🟣 Fase 6 – Função Horária da Posição (MRUV)</h2>
+<h2>🧪 Fase 7 - Missão Investigativa: O Segredo da Curva</h2>
+
+<p>
+Você gerou um gráfico de <strong>posição × tempo</strong> para um MRUV.
+Observe atentamente a forma da curva.
+</p>
+
+<p><strong>Pergunta:</strong> O que podemos afirmar sobre a aceleração?</p>
+
+<select id="missao1">
+  <option value="">Escolha uma alternativa</option>
+  <option value="a">A aceleração é nula</option>
+  <option value="b">A aceleração é positiva</option>
+  <option value="c">A aceleração é negativa</option>
+</select>
+
+<button onclick="verificaMissao1()">Responder</button>
+
+<div id="respMissao1" class="result"></div>
+</div>
+
+<div class="card">
+<h2>🟣 Fase 8 – Função Horária da Posição (MRUV)</h2>
 
 <p>
 Quando o movimento possui aceleração constante, a posição não cresce de forma linear.
@@ -240,7 +317,7 @@ Ela é dada por:
 
 <!-- FASE VELOCIDADE -->
 <div class="card">
-<h2>⏱️ Fase 7 – Velocidade Média (MRU)</h2>
+<h2>⏱️ Fase 9 – Velocidade Média (MRU)</h2>
 <p>
 Um objeto se move com velocidade constante. Vamos analisar a posição ao longo do tempo.
 </p>
@@ -263,7 +340,7 @@ Um objeto se move com velocidade constante. Vamos analisar a posição ao longo 
 
 <!-- FASE ACELERAÇÃO -->
 <div class="card">
-<h2>⚡ Fase 8 – Aceleração Média (MRUV)</h2>
+<h2>⚡ Fase 10 – Aceleração Média (MRUV)</h2>
 <p>
 Agora o movimento tem aceleração constante. Observe como a velocidade varia com o tempo.
 </p>
@@ -361,6 +438,39 @@ r.style.display="block";
 atualizar();
 }
 
+function verificaConceito2(){
+    let resp = document.getElementById("conceito2").value;
+    let r = document.getElementById("respConceito2");
+
+    r.style.display = "block";
+
+    if(resp === "b"){
+        r.innerHTML = "✅ Correto! Velocidade variando indica aceleração ≠ 0.";
+        pontos += 10;
+    } else {
+        r.innerHTML = "❌ No MRU a velocidade é constante.";
+    }
+    atualizar();
+}
+
+
+function verificaMissao1(){
+    let resposta = document.getElementById("missao1").value;
+    let r = document.getElementById("respMissao1");
+
+    r.style.display = "block";
+
+    if(resposta === "b"){
+        r.innerHTML = "✅ Correto! Uma parábola com concavidade para cima indica <strong>aceleração positiva</strong>.";
+        pontos += 15;
+    } else if(resposta === "c"){
+        r.innerHTML = "❌ Atenção! Concavidade para baixo indicaria aceleração negativa.";
+    } else {
+        r.innerHTML = "❌ Se a aceleração fosse nula, o gráfico seria uma reta.";
+    }
+    atualizar();
+}
+
 /* ---------- FASE VELOCIDADE ---------- */
 function faseVelocidade(){
 let s0=+document.getElementById("s0").value;
@@ -377,7 +487,7 @@ document.getElementById("rv").style.display="block";
 document.getElementById("rv").innerHTML=
 `📈 Movimento uniforme: posição cresce linearmente com o tempo.`;
 
-pontos+=15;
+pontos+=10;
 atualizar();
 
 if(graficoST) graficoST.destroy();
@@ -422,7 +532,7 @@ document.getElementById("ra").style.display="block";
 document.getElementById("ra").innerHTML=
 `⚡ Velocidade varia linearmente — aceleração constante.`;
 
-pontos+=15;
+pontos+=10;
 atualizar();
 
 if(graficoVT) graficoVT.destroy();
@@ -475,7 +585,7 @@ function faseMRUV(){
     • A concavidade depende do sinal da aceleração.
     `;
 
-    pontos += 20;
+    pontos += 10;
     atualizar();
 
     if(graficoMRUV) graficoMRUV.destroy();
@@ -512,3 +622,4 @@ function faseMRUV(){
 
 </body>
 </html>
+
