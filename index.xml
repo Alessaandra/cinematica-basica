@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Cinemática Explorer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinemática Explorer</title>
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -64,7 +64,7 @@ label{
     font-size:.9rem;
 }
 
-input{
+input, select{
     width:100%;
     padding:10px;
     border-radius:8px;
@@ -98,7 +98,7 @@ button:hover{ background:#7b1fa2; }
 
 canvas{
     margin-top:20px;
-    background:#fff;
+    background:#ffffff;
     border-radius:10px;
 }
 </style>
@@ -120,11 +120,9 @@ canvas{
 <!-- FASE 1 -->
 <div class="card">
 <h2>🎯 Fase 1 – Movimento e Referencial</h2>
-<p>
-Um corpo está em movimento quando sua posição muda ao longo do tempo em relação a um observador.
-</p>
+<p>Um corpo está em movimento quando sua posição muda em relação a um observador.</p>
 
-<p><strong>Pergunta:</strong> Um passageiro sentado dentro de um ônibus em movimento está:</p>
+<p><strong>Pergunta:</strong> Um passageiro sentado em um ônibus em movimento está:</p>
 
 <select id="q1">
 <option value="">Selecione</option>
@@ -138,10 +136,9 @@ Um corpo está em movimento quando sua posição muda ao longo do tempo em rela�
 
 <!-- FASE 2 -->
 <div class="card">
-<h2>📍 Fase 2 – Posição, Deslocamento e Distância</h2>
-<p>
-Um entregador sai do ponto 0 km, vai até 5 km e retorna ao ponto inicial.
-</p>
+<h2>📍 Fase 2 – Deslocamento e Distância</h2>
+
+<p>Um entregador sai do ponto 0 km, vai até 5 km e retorna ao ponto inicial.</p>
 
 <label>Deslocamento total (km)</label>
 <input type="number" id="desl">
@@ -156,9 +153,6 @@ Um entregador sai do ponto 0 km, vai até 5 km e retorna ao ponto inicial.
 <!-- FASE 3 -->
 <div class="card">
 <h2>⏱️ Fase 3 – Velocidade Média</h2>
-<p>
-Velocidade média é a razão entre a distância total percorrida e o tempo gasto.
-</p>
 
 <label>Distância total (km)</label>
 <input type="number" id="d3" value="200">
@@ -172,10 +166,7 @@ Velocidade média é a razão entre a distância total percorrida e o tempo gast
 
 <!-- FASE 4 -->
 <div class="card">
-<h2>⚡ Fase 4 – Aceleração</h2>
-<p>
-A aceleração indica a variação da velocidade ao longo do tempo.
-</p>
+<h2>⚡ Fase 4 – Aceleração Média</h2>
 
 <label>Velocidade inicial (m/s)</label>
 <input type="number" id="vi">
@@ -192,30 +183,23 @@ A aceleração indica a variação da velocidade ao longo do tempo.
 
 <!-- FASE 5 -->
 <div class="card">
-<h2>🧠 FASE 5 – Tipo de Movimento</h2>
+<h2>🧠 Fase 5 – Tipo de Movimento</h2>
 
-<p>
-Um corpo apresenta velocidade aumentando com o tempo de forma constante.
-Esse movimento é:
-</p>
+<p>Velocidade aumentando de forma constante indica:</p>
 
 <select id="conceito2">
-  <option value="">Escolha</option>
-  <option value="a">MRU</option>
-  <option value="b">MRUV</option>
+<option value="">Escolha</option>
+<option value="a">MRU</option>
+<option value="b">MRUV</option>
 </select>
 
 <button onclick="verificaConceito2()">Responder</button>
-
 <div id="respConceito2" class="result"></div>
 </div>
 
 <!-- FASE 6 -->
 <div class="card">
-<h2>🧭 Fase 6 – Classificação do Movimento</h2>
-<p>
-Se a velocidade é positiva e aumenta com o tempo, o movimento é:
-</p>
+<h2>🧭 Fase 6 – Classificação</h2>
 
 <select id="q5">
 <option value="">Selecione</option>
@@ -228,102 +212,79 @@ Se a velocidade é positiva e aumenta com o tempo, o movimento é:
 <div id="r5" class="result"></div>
 </div>
 
-
+<!-- FASE 7 -->
 <div class="card">
-<h2>🧪 Fase 7 - Missão Investigativa: O Segredo da Curva</h2>
+<h2>🧪 Fase 7 – Missão Investigativa</h2>
 
-<p>
-Você gerou um gráfico de <strong>posição × tempo</strong> para um MRUV.
-Observe atentamente a forma da curva.
-</p>
-
-<p><strong>Pergunta:</strong> O que podemos afirmar sobre a aceleração?</p>
+<p>Um gráfico posição &times; tempo parabólico indica:</p>
 
 <select id="missao1">
-  <option value="">Escolha uma alternativa</option>
-  <option value="a">A aceleração é nula</option>
-  <option value="b">A aceleração é positiva</option>
-  <option value="c">A aceleração é negativa</option>
+<option value="">Escolha</option>
+<option value="a">Aceleração nula</option>
+<option value="b">Aceleração positiva</option>
+<option value="c">Aceleração negativa</option>
 </select>
 
 <button onclick="verificaMissao1()">Responder</button>
-
 <div id="respMissao1" class="result"></div>
 </div>
 
+<!-- FASE 8 -->
 <div class="card">
 <h2>🟣 Fase 8 – Função Horária da Posição (MRUV)</h2>
 
-<p>
-Quando o movimento possui aceleração constante, a posição não cresce de forma linear.
-Ela é dada por:
-<br><br>
-<strong>s(t) = s₀ + v₀t + ½at²</strong>
-</p>
+<p><strong>s(t) = s&#8320; + v&#8320;t + &frac12;at²</strong></p>
 
-<label>Posição inicial s₀ (m)</label>
+<label>s&#8320; (m)</label>
 <input type="number" id="s0_mruv" value="0">
 
-<label>Velocidade inicial v₀ (m/s)</label>
+<label>v&#8320; (m/s)</label>
 <input type="number" id="v0_mruv" value="2">
 
-<label>Aceleração a (m/s²)</label>
+<label>a (m/s²)</label>
 <input type="number" id="a_mruv" value="1">
 
 <label>Tempo total (s)</label>
 <input type="number" id="t_mruv" value="10">
 
 <button onclick="faseMRUV()">Gerar Gráfico</button>
-
 <div id="r_mruv" class="result"></div>
-
 <canvas id="graficoMRUV"></canvas>
 </div>
 
-
-<!-- FASE VELOCIDADE -->
+<!-- MRU -->
 <div class="card">
-<h2>⏱️ Fase 9 – Velocidade Média (MRU)</h2>
-<p>
-Um objeto se move com velocidade constante. Vamos analisar a posição ao longo do tempo.
-</p>
+<h2>📈 MRU – Posição &times; Tempo</h2>
 
-<label>Posição inicial S₀ (m)</label>
+<label>s&#8320; (m)</label>
 <input type="number" id="s0" value="0">
 
-<label>Velocidade (m/s)</label>
+<label>v (m/s)</label>
 <input type="number" id="v" value="2">
 
-<label>Tempo total (s)</label>
+<label>Tempo (s)</label>
 <input type="number" id="t" value="10">
 
-<button onclick="faseVelocidade()">Executar Missão</button>
-
+<button onclick="faseVelocidade()">Executar</button>
 <div id="rv" class="result"></div>
-
 <canvas id="graficoST"></canvas>
 </div>
 
-<!-- FASE ACELERAÇÃO -->
+<!-- MRUV -->
 <div class="card">
-<h2>⚡ Fase 10 – Aceleração Média (MRUV)</h2>
-<p>
-Agora o movimento tem aceleração constante. Observe como a velocidade varia com o tempo.
-</p>
+<h2>⚡ MRUV – Velocidade &times; Tempo</h2>
 
-<label>Velocidade inicial v₀ (m/s)</label>
+<label>v&#8320; (m/s)</label>
 <input type="number" id="v0" value="0">
 
-<label>Aceleração (m/s²)</label>
+<label>a (m/s²)</label>
 <input type="number" id="a" value="1">
 
-<label>Tempo total (s)</label>
+<label>Tempo (s)</label>
 <input type="number" id="t2" value="10">
 
-<button onclick="faseAceleracao()">Executar Missão</button>
-
+<button onclick="faseAceleracao()">Executar</button>
 <div id="ra" class="result"></div>
-
 <canvas id="graficoVT"></canvas>
 </div>
 
@@ -332,265 +293,143 @@ Agora o movimento tem aceleração constante. Observe como a velocidade varia co
 </div>
 
 <script>
-let pontos=0;
-let graficoST, graficoVT;
-let graficoMRUV;
+let pontos = 0;
+let graficoST, graficoVT, graficoMRUV;
 
 function atualizar(){
-document.getElementById("pontos").textContent=pontos;
-document.getElementById("nivel").textContent=Math.floor(pontos/30)+1;
+    document.getElementById("pontos").textContent = pontos;
+    document.getElementById("nivel").textContent = Math.floor(pontos/30)+1;
 }
 
-
 function fase1(){
-    let q1 = document.getElementById("q1").value;
     let r = document.getElementById("r1");
-
-    if(q1 === "certo"){
-        pontos += 10;
-        r.innerHTML = "✅ Correto! Movimento depende do referencial.";
-    } else {
-        r.innerHTML = "❌ Atenção! Em relação ao banco, o passageiro está em repouso.";
+    if(document.getElementById("q1").value==="certo"){
+        pontos+=10;
+        r.innerHTML="✅ Correto!";
+    }else{
+        r.innerHTML="❌ Em relação ao banco, está em repouso.";
     }
-    r.style.display = "block";
+    r.style.display="block";
     atualizar();
 }
 
-
 function fase2(){
-    let deslocamento = parseFloat(document.getElementById("desl").value);
-    let distancia = parseFloat(document.getElementById("dist").value);
+    let d = +desl.value;
+    let di = +dist.value;
     let r = document.getElementById("r2");
-
-    if(deslocamento === 0 && distancia === 10){
-        pontos += 10;
-        r.innerHTML = "✅ Excelente! Deslocamento = 0 km e distância = 10 km.";
-    } else {
-        r.innerHTML = "❌ Revise: deslocamento depende da posição inicial e final.";
+    if(d===0 && di===10){
+        pontos+=10;
+        r.innerHTML="✅ Perfeito!";
+    }else{
+        r.innerHTML="❌ Reveja deslocamento e distância.";
     }
-    r.style.display = "block";
+    r.style.display="block";
     atualizar();
 }
 
 function fase3(){
-    let d = parseFloat(document.getElementById("d3").value);
-    let t = parseFloat(document.getElementById("t3").value);
-    let vm = d / t;
-
+    let vm = d3.value/t3.value;
     let r = document.getElementById("r3");
-    pontos += 10;
-    r.innerHTML = `🚗 Velocidade média = <strong>${vm.toFixed(1)} km/h</strong>`;
-    r.style.display = "block";
+    pontos+=10;
+    r.innerHTML=`🚗 v<sub>m</sub> = ${vm.toFixed(1)} km/h`;
+    r.style.display="block";
     atualizar();
 }
 
 function fase4(){
-    let vi = parseFloat(document.getElementById("vi").value);
-    let vf = parseFloat(document.getElementById("vf").value);
-    let t = parseFloat(document.getElementById("t4").value);
-
-    let a = (vf - vi) / t;
-
+    let a = (vf.value-vi.value)/t4.value;
     let r = document.getElementById("r4");
-    pontos += 10;
-    r.innerHTML = `⚡ Aceleração média = <strong>${a.toFixed(2)} m/s²</strong>`;
-    r.style.display = "block";
-    atualizar();
-}
-
-function fase5(){
-    let q5 = document.getElementById("q5").value;
-    let r = document.getElementById("r5");
-
-    if(q5 === "certo"){
-        pontos += 10;
-        r.innerHTML = "🎉 Perfeito! Velocidade positiva e crescente → progressivo e acelerado.";
-    } else {
-        r.innerHTML = "❌ Pense no sinal da velocidade e da aceleração.";
-    }
-    r.style.display = "block";
+    pontos+=10;
+    r.innerHTML=`⚡ a = ${a.toFixed(2)} m/s²`;
+    r.style.display="block";
     atualizar();
 }
 
 function verificaConceito2(){
-    let resp = document.getElementById("conceito2").value;
     let r = document.getElementById("respConceito2");
-
-    r.style.display = "block";
-
-    if(resp === "b"){
-        r.innerHTML = "✅ Correto! Velocidade variando indica aceleração ≠ 0.";
-        pontos += 10;
-    } else {
-        r.innerHTML = "❌ No MRU a velocidade é constante.";
+    if(conceito2.value==="b"){
+        pontos+=10;
+        r.innerHTML="✅ Correto!";
+    }else{
+        r.innerHTML="❌ MRU tem velocidade constante.";
     }
+    r.style.display="block";
     atualizar();
 }
 
+function fase5(){
+    let r = document.getElementById("r5");
+    if(q5.value==="certo"){
+        pontos+=10;
+        r.innerHTML="🎉 Excelente!";
+    }else{
+        r.innerHTML="❌ Pense no sinal da velocidade.";
+    }
+    r.style.display="block";
+    atualizar();
+}
 
 function verificaMissao1(){
-    let resposta = document.getElementById("missao1").value;
     let r = document.getElementById("respMissao1");
-
-    r.style.display = "block";
-
-    if(resposta === "b"){
-        r.innerHTML = "✅ Correto! Uma parábola com concavidade para cima indica <strong>aceleração positiva</strong>.";
-        pontos += 15;
-    } else if(resposta === "c"){
-        r.innerHTML = "❌ Atenção! Concavidade para baixo indicaria aceleração negativa.";
-    } else {
-        r.innerHTML = "❌ Se a aceleração fosse nula, o gráfico seria uma reta.";
+    if(missao1.value==="b"){
+        pontos+=15;
+        r.innerHTML="✅ Aceleração positiva!";
+    }else{
+        r.innerHTML="❌ Observe a concavidade.";
     }
+    r.style.display="block";
     atualizar();
 }
 
-/* ---------- FASE VELOCIDADE ---------- */
 function faseVelocidade(){
-let s0=+document.getElementById("s0").value;
-let v=+document.getElementById("v").value;
-let t=+document.getElementById("t").value;
-
-let tempo=[], posicao=[];
-for(let i=0;i<=t;i++){
-tempo.push(i);
-posicao.push(s0+v*i);
+    let tempo=[], pos=[];
+    for(let i=0;i<=t.value;i++){
+        tempo.push(i);
+        pos.push(+s0.value + +v.value*i);
+    }
+    if(graficoST) graficoST.destroy();
+    graficoST=new Chart(graficoST=document.getElementById("graficoST"),{
+        type:"line",
+        data:{labels:tempo,datasets:[{label:"Posição (m)",data:pos,borderWidth:2}]},
+        options:{scales:{x:{title:{display:true,text:"Tempo (s)"}},y:{title:{display:true,text:"Posição (m)"}}}}
+    });
 }
 
-document.getElementById("rv").style.display="block";
-document.getElementById("rv").innerHTML=
-`📈 Movimento uniforme: posição cresce linearmente com o tempo.`;
-
-pontos+=10;
-atualizar();
-
-if(graficoST) graficoST.destroy();
-graficoST=new Chart(document.getElementById("graficoST"),{
-type:'line',
-data:{
-labels:tempo,
-datasets:[{
-label:'Posição (m)',
-data:posicao,
-borderWidth:2
-}]
-},
-options:{
-plugins:{
-title:{
-display:true,
-text:'Gráfico Posição × Tempo (MRU)'
-}
-},
-scales:{
-x:{title:{display:true,text:'Tempo (s)'}},
-y:{title:{display:true,text:'Posição (m)'}}
-}
-}
-});
-}
-
-/* ---------- FASE ACELERAÇÃO ---------- */
 function faseAceleracao(){
-let v0=+document.getElementById("v0").value;
-let a=+document.getElementById("a").value;
-let t=+document.getElementById("t2").value;
-
-let tempo=[], vel=[];
-for(let i=0;i<=t;i++){
-tempo.push(i);
-vel.push(v0+a*i);
-}
-
-document.getElementById("ra").style.display="block";
-document.getElementById("ra").innerHTML=
-`⚡ Velocidade varia linearmente — aceleração constante.`;
-
-pontos+=10;
-atualizar();
-
-if(graficoVT) graficoVT.destroy();
-graficoVT=new Chart(document.getElementById("graficoVT"),{
-type:'line',
-data:{
-labels:tempo,
-datasets:[{
-label:'Velocidade (m/s)',
-data:vel,
-borderWidth:2
-}]
-},
-options:{
-plugins:{
-title:{
-display:true,
-text:'Gráfico Velocidade × Tempo (MRUV)'
-}
-},
-scales:{
-x:{title:{display:true,text:'Tempo (s)'}},
-y:{title:{display:true,text:'Velocidade (m/s)'}}
-}
-}
-});
+    let tempo=[], vel=[];
+    for(let i=0;i<=t2.value;i++){
+        tempo.push(i);
+        vel.push(+v0.value + +a.value*i);
+    }
+    if(graficoVT) graficoVT.destroy();
+    graficoVT=new Chart(document.getElementById("graficoVT"),{
+        type:"line",
+        data:{labels:tempo,datasets:[{label:"Velocidade (m/s)",data:vel,borderWidth:2}]},
+        options:{scales:{x:{title:{display:true,text:"Tempo (s)"}},y:{title:{display:true,text:"Velocidade (m/s)"}}}}
+    });
 }
 
 function faseMRUV(){
-    let s0 = +document.getElementById("s0_mruv").value;
-    let v0 = +document.getElementById("v0_mruv").value;
-    let a  = +document.getElementById("a_mruv").value;
-    let t  = +document.getElementById("t_mruv").value;
-
-    let tempo = [];
-    let posicao = [];
-
-    for(let i=0; i<=t; i++){
+    let tempo=[], pos=[];
+    for(let i=0;i<=t_mruv.value;i++){
         tempo.push(i);
-        posicao.push(s0 + v0*i + 0.5*a*i*i);
+        pos.push(+s0_mruv.value + +v0_mruv.value*i + 0.5*a_mruv.value*i*i);
     }
-
-    let r = document.getElementById("r_mruv");
-    r.style.display = "block";
-    r.innerHTML = `
-    📐 Este gráfico representa um <strong>MRUV</strong>.
-    <br>
-    A forma parabólica indica que a posição varia com o quadrado do tempo.
-    <br>
-    • A concavidade depende do sinal da aceleração.
-    `;
-
-    pontos += 10;
-    atualizar();
-
     if(graficoMRUV) graficoMRUV.destroy();
-
-    graficoMRUV = new Chart(document.getElementById("graficoMRUV"), {
-        type: 'line',
-        data: {
-            labels: tempo,
-            datasets: [{
-                label: 'Posição (m)',
-                data: posicao,
-                borderWidth: 2
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Gráfico Posição × Tempo — MRUV'
-                }
-            },
-            scales: {
-                x: {
-                    title: { display: true, text: 'Tempo (s)' }
-                },
-                y: {
-                    title: { display: true, text: 'Posição (m)' }
-                }
-            }
-        }
+    graficoMRUV=new Chart(document.getElementById("graficoMRUV"),{
+        type:"line",
+        data:{labels:tempo,datasets:[{label:"Posição (m)",data:pos,borderWidth:2}]},
+        options:{scales:{x:{title:{display:true,text:"Tempo (s)"}},y:{title:{display:true,text:"Posição (m)"}}}}
     });
+}
+
+function resetar(){
+    pontos=0;
+    atualizar();
+    document.querySelectorAll(".result").forEach(r=>r.style.display="none");
+    if(graficoST) graficoST.destroy();
+    if(graficoVT) graficoVT.destroy();
+    if(graficoMRUV) graficoMRUV.destroy();
 }
 </script>
 
